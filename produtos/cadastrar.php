@@ -3,10 +3,10 @@ require __DIR__ . '/verifica_login.php';
 require __DIR__ . '/../conexao.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $nome = $_POST['nome'];
-    $descricao = $_POST['descricao'];
-    $preco = $_POST['preco'];
-    $quantidade = $_POST['quantidade'];
+    $nome = trim($_POST['nome']);
+$descricao = trim($_POST['descricao']);
+$preco = trim($_POST['preco']);
+$quantidade = trim($_POST['quantidade']);
 
     if ($nome == "" || $preco == "" || $quantidade == "") {
         $mensagem = "Preencha todos os campos obrigatórios.";
@@ -15,9 +15,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 VALUES ('$nome', '$descricao', '$preco', '$quantidade')";
 
         if (mysqli_query($conexao, $sql)) {
-            header('Location: listar.php');
-            exit;
-        } else {
+    $_SESSION['mensagem'] = "Produto cadastrado com sucesso!";
+    header('Location: listar.php');
+    exit;
+} else {
             $mensagem = "Erro ao cadastrar produto: " . mysqli_error($conexao);
         }
     }

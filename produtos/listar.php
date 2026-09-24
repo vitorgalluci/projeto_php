@@ -7,11 +7,18 @@ $resultado = mysqli_query($conexao, $sql);
 <?php require __DIR__ . '/../cabecalho.php'; ?>
 <main>
     <h2>Produtos cadastrados</h2>
+
+    <?php if (isset($_SESSION['mensagem'])) { ?>
+        <p><?php echo $_SESSION['mensagem']; ?></p>
+        <?php unset($_SESSION['mensagem']); ?>
+    <?php } ?>
+
     <a href="cadastrar.php">Cadastrar novo produto</a>
+    <!-- tabela de produtos continua igual -->
     <table>
         <tr>
             <th>Produto</th>
-            <th>Descrição</th>
+            <th>Descrição</th>  
             <th>Preço</th>
             <th>Qtd.</th>
             <th>Ações</th>
@@ -32,4 +39,6 @@ $resultado = mysqli_query($conexao, $sql);
         <?php } ?>
     </table>
 </main>
+
+
 <?php require __DIR__ . '/../rodape.php'; ?>
